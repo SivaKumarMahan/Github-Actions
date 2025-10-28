@@ -64,12 +64,13 @@ ssh-keygen -t rsa -b 4096 -C "github-actions-deploy" -f ~/.ssh/github_actions_de
 ```
 
 This creates:
+
 ~/.ssh/github_actions_deploy → Private Key
 
 ~/.ssh/github_actions_deploy.pub → Public Key
 
 ## Step 3: Create Azure Resources
-Create VNet, Subnet, NSG, Public IP, NIC, and VM
+Create VNet, Subnet, NSG, Public IP, NIC and VM
 
 ```bash
 az network vnet create \
@@ -141,7 +142,9 @@ ssh -i ~/.ssh/github_actions_deploy azureuser@74.225.142.248
 ssh azureuser@74.225.142.248
 
 ## Step 5: Fix Docker Permission Issue (if any)
+```
 permission denied while trying to connect to the Docker daemon socket
+```
 
 Run the following fix inside your VM:
 
