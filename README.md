@@ -23,6 +23,7 @@ Follow these steps to reproduce the setup anytime.
 
 ## ⚙️ Repository Structure
 
+```
 Github-Actions/
 ├─ .github/
 │ └─ workflows/
@@ -32,7 +33,7 @@ Github-Actions/
 │ └─ index.js # Sample Node.js app
 ├─ package-lock.json
 └─ README.md
-
+```
 
 ---
 
@@ -64,6 +65,7 @@ ssh-keygen -t rsa -b 4096 -C "github-actions-deploy" -f ~/.ssh/github_actions_de
 
 This creates:
 ~/.ssh/github_actions_deploy → Private Key
+
 ~/.ssh/github_actions_deploy.pub → Public Key
 
 ## Step 3: Create Azure Resources
@@ -135,6 +137,7 @@ az vm user update \
 
 ## Step 4: Test SSH Access
 ssh -i ~/.ssh/github_actions_deploy azureuser@74.225.142.248
+
 ssh azureuser@74.225.142.248
 
 ## Step 5: Fix Docker Permission Issue (if any)
@@ -170,6 +173,7 @@ exit
 
 Then reconnect:
 ssh azureuser@74.225.142.248
+
 docker ps   # should work without sudo
 
 ## Step 6: Configure GitHub Secrets
@@ -203,11 +207,14 @@ az network nsg rule create \
 ## Step 8: Test the Deployment
 
 After your GitHub Actions workflow runs successfully, visit:
+
 azureuser@testUbuntuVM:~$ docker ps
+
 CONTAINER ID   IMAGE                                  COMMAND                  CREATED         STATUS              PORTS                                     NAMES
 5505bed72562   sivakumarmahan/github-actions:latest   "docker-entrypoint.s…"   2 minutes ago   Up About a minute   0.0.0.0:80->3000/tcp, [::]:80->3000/tcp   github-actions
 
 azureuser@testUbuntuVM:~$ curl http://localhost
+
 Hello from GitHub Actions CI/CD!
 
 Now, open your browser and visit: http://74.225.142.248 --> You will get "Hello from GitHub Actions CI/CD!"
