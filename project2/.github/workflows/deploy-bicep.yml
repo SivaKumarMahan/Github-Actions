@@ -31,6 +31,6 @@ jobs:
       - name: Deploy Bicep to Azure
         run: |
           az deployment group create \
-            --resource-group bicepResourceGroup \
+            --resource-group aimsplus \
             --template-file main.bicep \
-            --parameters @parameters.json
+            --parameters params.bicepparam
