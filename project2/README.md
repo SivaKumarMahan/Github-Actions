@@ -3,13 +3,13 @@ az ad app create --display-name "github-bicep-deployer"
 
 2. When you created your App Registration (for GitHub Actions OIDC or SP-based auth), Azure does not automatically create a service principal
 Create the Missing Service Principal
-az ad sp create --id bb76283e-4795-477e-ba2e-436aaa34b59f
+az ad sp create --id appId
 
 3. Assign Contributor access to your resource group:
 az role assignment create \
-  --assignee "bb76283e-4795-477e-ba2e-436aaa34b59f" \
+  --assignee "appId" \
   --role "Contributor" \
-  --scope "/subscriptions/ed79d02d-bd46-4fa8-96bb-4fcddc112959/resourceGroups/aimsplus"
+  --scope "/subscriptions/subscription-id/resourceGroups/test-rg"
 
 4. Add a Federated Credential between GitHub and Azure AD app:
 Under Azure Portal → App Registrations → Certificates & Secrets → Federated Credentials
