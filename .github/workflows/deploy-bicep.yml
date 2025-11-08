@@ -5,7 +5,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'project2/**'
+      - 'project2/**'   # trigger only when files in project2 change
   workflow_dispatch:
 
 permissions:
@@ -20,7 +20,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Login to Azure using OIDC
+      - name: Azure CLI Login via OIDC
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
@@ -28,11 +28,11 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Validate Bicep Template
-        run: az bicep build --file main.bicep
+        run: az bicep build --file project2/main.bicep
 
-      - name: Deploy Bicep to Azure
+      - name: Deploy Bicep Template to Azure
         run: |
           az deployment group create \
             --resource-group aimsplus \
-            --template-file main.bicep \
-            --parameters params.bicepparam
+            --template-file project2/main.bicep \
+            --parameters @project2/params.bicepparam
