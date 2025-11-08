@@ -1,14 +1,9 @@
-param storageAccountName string
-param location string
-param accountType string
-param kind string
-
 resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
-  name: storageAccountName
-  location: location
+  name: 'storagegithubaction'
+  location: 'Central India'
   sku: {
-    name: accountType
+    name: 'Standard_LRS'
   }
-  kind: kind
+  kind: 'StorageV2'
   properties: {}
 }
