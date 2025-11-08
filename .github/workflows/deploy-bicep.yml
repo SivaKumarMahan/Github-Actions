@@ -4,6 +4,8 @@ name: Deploy Bicep Template
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'project2/**'
   workflow_dispatch:
 
 permissions:
